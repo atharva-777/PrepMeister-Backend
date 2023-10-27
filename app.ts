@@ -1,5 +1,6 @@
 import express, {Express,Request,Response,Application} from "express";
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -7,6 +8,7 @@ const app:Application = express();
 const port = process.env.PORT || 8000;
 
 app.use(express.static(__dirname))
+app.use(cors)
 
 app.get('/',(req:Request,res:Response)=>{
     res.send("Welcome to Node.js & Typescript Backend Server");
@@ -15,7 +17,6 @@ app.get('/',(req:Request,res:Response)=>{
 app.get('/test',(req:Request,res:Response)=>{
     res.sendFile(__dirname + "/index.html");
 })
-
 
 app.listen(port,()=>{
     console.log(`Listening on http://localhost:${port}`);
