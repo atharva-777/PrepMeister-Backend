@@ -4,6 +4,7 @@
   "description": "Backend setup for prep-meister",
   "main": "index.js",
   "scripts": {
+    "serve" : "nodemon ./index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/app.js",
     "build": "tsup src",
