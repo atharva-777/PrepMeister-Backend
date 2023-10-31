@@ -1,25 +1,19 @@
-import express, {Express,Request,Response,Application} from "express";
-import dotenv from 'dotenv';
-import cors from 'cors';
+import express, { Application, Express, response } from "express";
+import dotenv from "dotenv";
+import cors from "cors";
 
-dotenv.config();
+class App {
+    public readonly app:Express;
+    constructor() {
+        this.app = express();
+        this.routes();
+    }
 
-const app:Application = express();
-const port = process.env.PORT || 8000;
+    private routes() : void {
+        this.app.get('/',(_req,res)=>{
+            return res.send('Welcome Atharva');
+        })
+    }
+}
 
-app.use(express.static(__dirname))
-app.use(cors)
-
-app.get('/',(req:Request,res:Response)=>{
-    res.send("Welcome to Node.js & Typescript Backend Server");
-});
-
-app.get('/test',(req:Request,res:Response)=>{
-    res.sendFile(__dirname + "/index.html");
-})
-
-app.listen(port,()=>{
-    console.log(`Listening on http://localhost:${port}`);
-})
-
-export default app;
+export const app = new App().app;
