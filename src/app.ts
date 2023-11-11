@@ -11,8 +11,13 @@ class App {
 
     private routes() : void {
         this.app.get('/',(_req,res)=>{
-            return res.send('Welcome Atharva');
+            return res.send('Welcome Atharva!');
         })
+
+        this.app.get('/login',(_req,res)=>{
+            return res.send('Login');
+        })
+
     }
 }
 
