@@ -4,7 +4,7 @@
   "description": "Backend setup for prep-meister",
   "main": "index.js",
   "scripts": {
-    "serve" : "nodemon ./index.ts",
+    "serve": "nodemon ./index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/app.js",
     "build": "tsup src",
@@ -21,6 +21,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
     "express": "^4.18.2",
     "mongodb": "^6.2.0",
     "mongoose": "^7.6.3",
