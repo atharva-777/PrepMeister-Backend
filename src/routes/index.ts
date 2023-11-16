@@ -1,9 +1,11 @@
+import { error } from "console";
 import { Router } from "express";
 
 const router = Router();
 
 router.get('/',(_req,res)=>{
-    return res.render('index');
+    // throw error("Error")
+    res.render('index',{age:21});
 })
 
 router.get('/test',(_req,res)=>{
