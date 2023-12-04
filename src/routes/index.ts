@@ -7,7 +7,7 @@ router.get("/", (_req, res) => {
 });
 
 router.route('/jsonData').get((_req,res)=>{
-    res.json({'name':'Atharva','roll':38})
+    res.json({'name':'Atharva S. Jadhav','roll':38})
 })
 
 router.get("/youtube", (_req, res) => {

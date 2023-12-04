@@ -12,6 +12,11 @@ import errorHandler from "./middlewares/error_handler";
 import { connectToDB } from "./db/dbConfig";
 import path from "path";
 
+const corsOptions = {
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200,
+};
+
 class App {
   public readonly app: Express;
   constructor() {
@@ -20,8 +25,8 @@ class App {
     connectToDB();
     // this.routes();
     // this.app.use(path.resolve(__dirname));
-    this.app.use(cors());
-    this.app.use("/", router);
+    this.app.use(cors(corsOptions));
+    this.app.use("/api/v1", router);
     this.app.set("view engine", "ejs");
     this.app.use(errorHandler);
   }
