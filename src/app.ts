@@ -7,10 +7,11 @@ import express, {
 } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import router from "./routes";
+import { problemRouter } from "./routes";
 import errorHandler from "./middlewares/error_handler";
 import { connectToDB } from "./db/dbConfig";
 import path from "path";
+import bodyParser from "body-parser";
 
 const corsOptions = {
   origin: "http://localhost:3000",
@@ -25,8 +26,10 @@ class App {
     connectToDB();
     // this.routes();
     // this.app.use(path.resolve(__dirname));
+    this.app.use(bodyParser.json());
+    this.app.use(express.json());
     this.app.use(cors(corsOptions));
-    this.app.use("/api/v1", router);
+    this.app.use("/api/v1/problems", problemRouter);
     this.app.set("view engine", "ejs");
     this.app.use(errorHandler);
   }
