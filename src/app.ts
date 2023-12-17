@@ -7,16 +7,12 @@ import express, {
 } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import { problemRouter } from "./routes";
+import { problemRouter, submissionRouter } from "./routes";
 import errorHandler from "./middlewares/error_handler";
 import { connectToDB } from "./db/dbConfig";
 import path from "path";
 import bodyParser from "body-parser";
-
-const corsOptions = {
-  origin: "http://localhost:3000",
-  optionsSuccessStatus: 200,
-};
+import { corsOptions } from "./config/cors_config";
 
 class App {
   public readonly app: Express;
@@ -30,6 +26,7 @@ class App {
     this.app.use(express.json());
     this.app.use(cors(corsOptions));
     this.app.use("/api/v1/problems", problemRouter);
+    this.app.use('/api/v1/submissions',submissionRouter);
     this.app.set("view engine", "ejs");
     this.app.use(errorHandler);
   }
