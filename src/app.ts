@@ -7,7 +7,7 @@ import express, {
 } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import { backendRouter, problemRouter, submissionRouter } from "./routes";
+import { backendRouter, problemRouter, submissionRouter, chatRouter } from "./routes";
 import errorHandler from "./middlewares/error_handler";
 import { connectToDB } from "./db/dbConfig";
 import path from "path";
@@ -28,6 +28,7 @@ class App {
     this.app.use('/',backendRouter);
     this.app.use("/api/v1/problems", problemRouter);
     this.app.use("/api/v1/submissions", submissionRouter);
+    this.app.use('/api/v1/chats',chatRouter);
     this.app.set("view engine", "ejs");
     this.app.use(errorHandler);
   }
