@@ -5,6 +5,10 @@ const chatSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   members: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -20,6 +24,6 @@ const chatSchema = new mongoose.Schema({
   ],
 });
 
-const Chat = mongoose.model('chats',chatSchema);
+const Chat = mongoose.model("chats", chatSchema);
 
 export default Chat;

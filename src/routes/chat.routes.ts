@@ -9,4 +9,10 @@ chatRouter.route('/createChat')
     chatRouter.route('/joinChat')
     .post(ChatController.joinChat);
 
+    chatRouter.route('/leaveChat')
+    .post(ChatController.leaveChat);
+
+    chatRouter.route('/deleteChat')
+    .post(ChatController.deleteChat);
+
 export default chatRouter;
