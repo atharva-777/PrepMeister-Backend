@@ -9,7 +9,7 @@ class SubmissionController {
     next: NextFunction
   ) => {
     try {
-      const { language_id, source_code, stdin } = req.body;
+      const { language_id, source_code, stdin, expected_output } = req.body;
       console.log("here",req.body);
 
       const sub = await axios({
@@ -29,6 +29,7 @@ class SubmissionController {
           language_id: language_id,
           source_code: source_code,
           stdin: stdin,
+          expected_output:expected_output,
         },
       });
 
@@ -48,7 +49,7 @@ class SubmissionController {
         method: "GET",
         url: `https://judge0-ce.p.rapidapi.com/submissions/${submissionToken}`,
         params: {
-          base64_encoded: "true",
+          base64_encoded: "false",
           wait: "false",
           fields: "*",
         },

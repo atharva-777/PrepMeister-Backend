@@ -25,6 +25,33 @@ const ioServer = io.listen(server);
 ioServer.on("connection", (socket) => {
   console.log("New client connected ", socket.id);
   const transport = socket.conn.transport.name;
+
+  socket.on("setup",(user)=>{
+    socket.join(user._id);
+    socket.emit("connected");
+  })
+
+  socket.on("join chat",(room)=>{
+    socket.join(room);
+  })
+
+  socket.on("typing",(room)=>{
+    socket.in(room).emit("typing");
+  })
+
+  socket.on("stop typing",(room)=>{
+    socket.in(room).emit("stop typing");
+  })
+  
+  socket.on("message", (newMessage) => {
+      let chat = newMessage.chat;
+      if(!chat.users)return console.log("chat.users is not defined");
+      chat.users.forEach((user:any)=>{
+        if(user._id === newMessage.sender._id)return;
+        socket.in(user._id).emit("message received",newMessage);
+      })
+  });
+
   socket.conn.on("upgrade", () => {
     const upgradedTransport = socket.conn.transport.name;
   });
@@ -40,11 +67,6 @@ ioServer.on("connection", (socket) => {
       username: username,
       __createdTime__,
     });
-  });
-  socket.on("message", (message) => {
-    console.log("message event at backend");
-    console.log(`Received message from client: ${message}`);
-    // ioServer.emit("message", message);
   });
   socket.on("disconnect", () => {
     console.log("Client disconnected");
