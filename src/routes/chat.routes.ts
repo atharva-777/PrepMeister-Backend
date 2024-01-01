@@ -15,4 +15,7 @@ chatRouter.route('/createChat')
     chatRouter.route('/deleteChat')
     .post(ChatController.deleteChat);
 
+    chatRouter.route('/accessChat')
+    .post(ChatController.accessChat);
+
 export default chatRouter;

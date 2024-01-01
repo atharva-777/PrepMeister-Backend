@@ -3,6 +3,25 @@ import Chat from "../models/chatModel";
 import user from "../models/userModel";
 
 class ChatController {
+
+  static async accessChat(req: Request,res: Response, next:NextFunction){
+    try{
+      const {userId} = req.body;
+
+      const chats = await Chat.find({
+        $and:[
+          {members: {$elemMatch: {$eq: userId}}},
+        ],
+      })
+      .populate("messages");
+
+      return res.json({message:"Chats fetched",chats});
+
+    }catch(err){
+      return res.json({Error:err});
+    }
+  }
+
   static async createChat(req: Request, res: Response, next: NextFunction) {
     try {
       const { name, user } = req.body;
